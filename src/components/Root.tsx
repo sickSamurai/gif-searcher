@@ -7,7 +7,7 @@ import React from 'react'
 export const Root = () => {
   const [categories, setCategories] = useState<string[]>([])
 
-  const addCategory = newCategory => {
+  const addCategory = (newCategory: string) => {
     if (categories.includes(newCategory)) return
     else setCategories([newCategory, ...categories])
   }
