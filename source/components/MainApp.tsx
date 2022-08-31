@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Title } from './AppTitle'
 import { CategoryList } from './CategoryList'
 import { CategoryFinder } from './CategoryFinder'
@@ -10,6 +10,10 @@ const MainApp = () => {
     if (categories.includes(newCategory) || !newCategory) return
     else setCategories([newCategory, ...categories])
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [categories])
 
   return (
     <>

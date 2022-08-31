@@ -1,5 +1,5 @@
 import { FormEvent } from 'react'
-import { Box, Divider, IconButton, Stack, TextField } from '@mui/material'
+import { AppBar, IconButton, InputAdornment, TextField, Toolbar } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import useForm from '../hooks/useForm'
 
@@ -17,21 +17,28 @@ export const CategoryFinder = ({ onNewSearch }: Props) => {
   }
 
   return (
-    <Stack direction='row' component='form' onSubmit={onSubmit}>
-      <TextField
-        type='text'
-        value={inputValue}
-        onChange={onInputChange}
-        required={true}
-        variant='outlined'
-        label='Buscar GIFs'
-        placeholder='Dragon Ball'
-        autoComplete='off'
-        sx={{ minWidth: '95%' }}
-      />
-      <IconButton type='submit' sx={{ m: 'auto' }}>
-        <SearchIcon />
-      </IconButton>
-    </Stack>
+    <AppBar color='inherit' position='sticky'>
+      <Toolbar component='form' onSubmit={onSubmit}>
+        <TextField
+          type='text'
+          value={inputValue}
+          onChange={onInputChange}
+          required={true}
+          variant='filled'
+          label='Buscar GIFs'
+          autoComplete='off'
+          sx={{ width: '100%' }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position='end'>
+                <IconButton type='submit'>
+                  <SearchIcon />
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        />
+      </Toolbar>
+    </AppBar>
   )
 }

@@ -1,5 +1,4 @@
 import { List } from '@mui/material'
-import React from 'react'
 import GifGrid from './GifGrid'
 
 type Props = {
@@ -8,7 +7,7 @@ type Props = {
 
 export const CategoryList = ({ categories }: Props) => {
   return (
-    <List>
+    <List sx={{ mt: 2 }}>
       {categories.map(category => (
         <GifGrid key={category} category={category} />
       ))}
