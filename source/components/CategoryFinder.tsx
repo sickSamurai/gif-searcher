@@ -18,7 +18,7 @@ export const CategoryFinder = ({ onNewSearch }: Props) => {
 
   return (
     <AppBar color='inherit' position='sticky'>
-      <Toolbar component='form' onSubmit={onSubmit}>
+      <Toolbar component='form' onSubmit={onSubmit} disableGutters variant='dense'>
         <TextField
           type='text'
           value={inputValue}
