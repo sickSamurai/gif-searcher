@@ -1,29 +1,37 @@
-import React, { ChangeEvent, FormEvent } from 'react'
-import { useState } from 'react'
+import { FormEvent } from 'react'
+import { Box, Divider, IconButton, Stack, TextField } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
+import useForm from '../hooks/useForm'
 
 type Props = {
   onNewSearch: (searchTerm: string) => void
 }
 
 export const CategoryFinder = ({ onNewSearch }: Props) => {
-  const [inputValue, setInputValue] = useState('')
+  const { inputValue, cleanInput, onInputChange } = useForm()
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const trimedInput = inputValue.trim()
-    if (trimedInput) {
-      onNewSearch(trimedInput)
-      setInputValue('')
-    }
+    onNewSearch(inputValue.trim())
+    cleanInput()
   }
 
-  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)
-
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input type='text' placeholder='Buscar GIF' value={inputValue} onChange={onInputChange} />
-      </form>
-    </>
+    <Stack direction='row' component='form' onSubmit={onSubmit}>
+      <TextField
+        type='text'
+        value={inputValue}
+        onChange={onInputChange}
+        required={true}
+        variant='outlined'
+        label='Buscar GIFs'
+        placeholder='Dragon Ball'
+        autoComplete='off'
+        sx={{ minWidth: '95%' }}
+      />
+      <IconButton type='submit' sx={{ m: 'auto' }}>
+        <SearchIcon />
+      </IconButton>
+    </Stack>
   )
 }

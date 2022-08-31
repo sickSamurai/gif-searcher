@@ -10,8 +10,6 @@ export default (category: string) => {
     const fetchGifs = async () => setGifs(await getGifs(category))
     fetchGifs().then(() => setChargeState(false))
   }, [])
-  return {
-    gifs,
-    isLoading
-  }
+
+  return { gifs, isLoading }
 }

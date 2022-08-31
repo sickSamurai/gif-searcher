@@ -13,14 +13,14 @@ const requestGiphy = async (searchTerm: string) => {
 }
 
 const formatData = (response: AxiosResponse<any, any>) => {
-  const responseGifs = response.data.data as any[]
-  const formatedGifs = responseGifs.map(gif => {
+  const giphyResponse = response.data.data as any[]
+  const formatedGifs: Gif[] = giphyResponse.map(gif => {
     return {
       id: gif.id,
       title: gif.title,
       url: gif.url,
       image: gif.images.downsized
-    } as Gif
+    }
   })
   return formatedGifs
 }

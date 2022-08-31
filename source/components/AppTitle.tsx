@@ -1,9 +1,11 @@
-import React from 'react'
+import Typography from '@mui/material/Typography'
+
+const titleStyle = { mb: 4 }
 
 export const Title = () => {
   return (
-    <>
-      <h1>Gif Searcher</h1>
-    </>
+    <Typography align='center' variant='h4' sx={titleStyle}>
+      Buscador de GIFs
+    </Typography>
   )
 }
