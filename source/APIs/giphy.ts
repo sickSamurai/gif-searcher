@@ -1,30 +1,27 @@
-import axios, { AxiosResponse } from 'axios'
-import Gif from '../types/Gif'
+import axios, { AxiosResponse } from 'axios';
 
-const baseURL = 'https://api.giphy.com/v1/gifs'
-const searchRoute = '/search?'
-const key = 'NzYey5Ev76VWxb9ojOwPWtOYHTvFVBYG'
-const limit = 10
+import Gif from '../types/Gif';
+
+const baseURL = "https://api.giphy.com/v1/gifs/search?";
+const key = "NzYey5Ev76VWxb9ojOwPWtOYHTvFVBYG";
+const limit = 10;
 
 const requestGiphy = async (searchTerm: string) => {
-  const url = `${baseURL}${searchRoute}q=${searchTerm}&api_key=${key}&limit=${limit}`
-  const giphyResponse = await axios.get(url)
-  return giphyResponse
-}
+  const url = `${baseURL}q=${searchTerm}&api_key=${key}&limit=${limit}`;
+  const response = await axios.get(url);
+  return response;
+};
 
-const formatData = (response: AxiosResponse<any, any>) => {
-  const giphyResponse = response.data.data as any[]
-  const formatedGifs: Gif[] = giphyResponse.map(gif => {
-    return {
-      id: gif.id,
-      title: gif.title,
-      url: gif.url,
-      image: gif.images.downsized
-    }
-  })
-  return formatedGifs
-}
+const formatResponse = (response: AxiosResponse) => {
+  const giphyResponse = response.data.data as any[];
+  return giphyResponse.map<Gif>((gif) => ({
+    id: gif.id,
+    title: gif.title,
+    url: gif.url,
+    image: gif.images.downsized
+  }));
+};
 
 export const getGifs = async (searchTerm: string) => {
-  return formatData(await requestGiphy(searchTerm))
-}
+  return formatResponse(await requestGiphy(searchTerm));
+};

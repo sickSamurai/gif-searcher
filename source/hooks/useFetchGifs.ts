@@ -1,15 +1,14 @@
-import { useEffect, useState } from 'react'
-import { getGifs } from '../APIs/giphy'
-import Gif from '../types/Gif'
+import { useEffect, useState } from 'react';
 
-export default (category: string) => {
-  const [gifs, setGifs] = useState<Gif[]>([])
-  const [isLoading, setChargeState] = useState(true)
+import { getGifs } from '../APIs/giphy';
+import Gif from '../types/Gif';
+
+export const useFetchGifs = (searchTerm: string) => {
+  const [gifs, setGifs] = useState([] as Gif[]);
 
   useEffect(() => {
-    const fetchGifs = async () => setGifs(await getGifs(category))
-    fetchGifs().then(() => setChargeState(false))
-  }, [])
+    getGifs(searchTerm).then(setGifs);
+  }, [searchTerm]);
 
-  return { gifs, isLoading }
-}
+  return { gifs };
+};
